@@ -1,0 +1,64 @@
+LOCAL AI CHAT APPLICATION - SETUP & RUN GUIDE
+
+This guide provides the complete instructions for setting up the environment and running the Local AI Chat application on a new computer. It assumes you already have the `app.py` and `index.html` files.
+
+******************************************************************
+INSTALLATION INSTRUCTIONS
+******************************************************************
+
+--- Ubuntu / Linux Setup ---
+
+To set up the project on Ubuntu/Linux, first create the project directory structure by opening a terminal and running:
+    mkdir -p ~/Desktop/ollama-chat-app/models
+
+Next, install the Ollama service using the official script:
+    curl -fsSL https://ollama.com/install.sh | sh
+
+After installing Ollama, download the AI model with `ollama pull dolphin-llama3`. Once downloaded, you need to find and move the model file. Navigate to the storage location with `cd ~/.ollama/models/blobs` and list the files with `ls -lh` to find the large file (around 4.7GB). Copy this file into your project folder using the command `cp <large-file-name> ~/Desktop/ollama-chat-app/models/`, making sure to replace `<large-file-name>` with the actual name. For convenience, go to your project's models folder with `cd ~/Desktop/ollama-chat-app/models` and rename the file with `mv <large-file-name> dolphin-llama3.gguf`.
+
+With the model in place, set up the Python environment. Ensure you have the necessary tools by running `sudo apt update` and `sudo apt install python3-pip python3-venv`. Navigate to your main project folder at `~/Desktop/ollama-chat-app` and create a virtual environment by running `python3 -m venv venv`. Activate this environment with `source venv/bin/activate`. Your terminal prompt will now show `(venv)` at the beginning.
+
+Finally, while the virtual environment is active, install the required Python libraries:
+    pip3 install Flask flask-cors llama-cpp-python Werkzeug
+
+
+--- macOS Setup ---
+
+To set up the project on macOS, first create the project directory structure by opening the Terminal app and running:
+    mkdir -p ~/Desktop/ollama-chat-app/models
+
+Next, install the Ollama service by downloading the application from ollama.com, opening the `.dmg` file, and dragging Ollama to your Applications folder. Run it once to start the service.
+
+After installing Ollama, download the AI model with `ollama pull dolphin-llama3`. Once downloaded, you need to find and move the model file. Navigate to the storage location with `cd ~/.ollama/models/blobs` and list the files with `ls -lh` to find the large file (around 4.7GB). Copy this file into your project folder using the command `cp <large-file-name> ~/Desktop/ollama-chat-app/models/`, making sure to replace `<large-file-name>` with the actual name. For convenience, go to your project's models folder with `cd ~/Desktop/ollama-chat-app/models` and rename the file with `mv <large-file-name> dolphin-llama3.gguf`.
+
+With the model in place, set up the Python environment. Navigate to your main project folder at `~/Desktop/ollama-chat-app` and create a virtual environment by running `python3 -m venv venv`. Activate this environment with `source venv/bin/activate`. Your terminal prompt will now show `(venv)` at the beginning.
+
+Finally, while the virtual environment is active, install the required Python libraries:
+    pip3 install Flask flask-cors llama-cpp-python Werkzeug
+
+
+******************************************************************
+HOW TO RUN THE APPLICATION
+******************************************************************
+
+To run the application after it has been installed (on either Ubuntu or macOS), open a terminal and navigate to the project folder with `cd ~/Desktop/ollama-chat-app`.
+
+Activate the virtual environment with `source venv/bin/activate`.
+
+Then, start the Python backend server by running `python3 app.py`. You must keep this terminal window open for the server to run.
+
+To use the chat, open a web browser and navigate to the address `http://localhost:5000`.
+
+******************************************************************
+PROJECT STRUCTURE OVERVIEW
+******************************************************************
+
+Your final project folder is self-contained and looks like this:
+
+/ollama-chat-app/
+├── app.py              (The Python backend server and API)
+├── index.html            (The HTML frontend user interface)
+├── chat_history.db     (The SQLite database, created on first run)
+├── /models/
+│   └── dolphin-llama3.gguf (The AI model file)
+└── /venv/                (The isolated Python virtual environment)
